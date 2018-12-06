@@ -11,12 +11,16 @@ const PORT = 3000;
 
 // App
 const app = express();
-app.get('/', async (req, res) => {
-  const token = req.query.token
+app.get('/', (req, res) => {
+  try {
+    const token = req.query.token
 
-  const jwtObj = jwt.verify(token, secret, { algorithm: 'HS256' })
+    const jwtObj = jwt.verify(token, secret, { algorithm: 'HS256' })
 
-  res.send(`Hello ${endCompany}!\n\n${JSON.parse(jwtObj, null, 4)}`);
+    res.send(`Hello ${endCompany}!\n\n${JSON.parse(jwtObj, null, 4)}`);
+  } catch (err) {
+    res.send(`Error!\n\n${err.toString()}`);
+  }
 });
 
 app.listen(PORT);
