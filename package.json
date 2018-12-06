@@ -8,7 +8,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.13"
+    "express": "^4.13",
+    "jsonwebtoken": "^8.4.0"
   }
 }
-
