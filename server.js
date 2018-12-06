@@ -7,7 +7,7 @@ const secret = process.env.SECRET || 'secret'
 const endCompany = process.env.END_COMPANY || 'guest'
 
 // Constants
-const PORT = 3001;
+const PORT = 3000;
 
 // App
 const app = express();
