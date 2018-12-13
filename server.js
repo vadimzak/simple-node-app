@@ -15,7 +15,7 @@ Hello ${endCompany},
 
 BACKGROUND_COLOR: ${process.env.BACKGROUND_COLOR},
 
-${JSON.stringify(jwtObj, null, 4)}`
+`
 
 // App
 const app = express();
