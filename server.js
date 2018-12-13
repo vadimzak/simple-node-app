@@ -10,7 +10,7 @@ const endCompany = process.env.END_COMPANY || 'guest'
 // Constants
 const PORT = 3000;
 
-const html = `<body style={ background-color='${process.env.BACKGROUND_COLOR}' }>
+const html = `<body style="background-color: ${process.env.BACKGROUND_COLOR};">
 Hello ${endCompany}!
 </body>
 `
