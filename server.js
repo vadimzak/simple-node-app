@@ -17,9 +17,7 @@ app.get('/', (req, res) => {
     const html = `
       <body style="background-color: ${process.env.BACKGROUND_COLOR}; color: ${process.env.TEXT_COLOR}">
         Hello ${process.env.END_COMPANY || 'guest'},<br>
-        <ol>
-          ${Array(Number(process.env.BULLETS)).keys().map(i => `<li>${process.env.MOTO}</li>`)}
-        </ol >
+        ${process.env.BULLETS}
       </body >
     `
     // const token = req.query.token
