@@ -13,7 +13,7 @@ const PORT = 3000;
 const html = `
 Hello ${endCompany},
 
-BACKGROUND_COLOR: ${process.env.BACKGROUND_COLOR},
+BACKGROUND_COLOR: ${JSON.stringify(process.env)},
 
 `
 
