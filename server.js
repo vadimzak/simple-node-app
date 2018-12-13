@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
       <body style="background-color: ${process.env.BACKGROUND_COLOR}; color: ${process.env.TEXT_COLOR}">
         Hello ${process.env.END_COMPANY || 'guest'},<br>
         <ol>
-          ${Array(Number(process.env.BULLETS)).keys().map(i) => `<li>${process.env.MOTO}</li>`}
+          ${Array(Number(process.env.BULLETS || 1)).keys().map(i) => `<li>${process.env.MOTO}</li>`}
         </ol >
       </body >
     `
