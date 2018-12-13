@@ -3,20 +3,30 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 
-const secret = process.env.SECRET || 'secret'
+const jwtSecret = process.env.JWT_SECRET
 const endCompany = process.env.END_COMPANY || 'guest'
+
 
 // Constants
 const PORT = 3000;
 
+const html = `
+Hello ${endCompany},
+
+BACKGROUND_COLOR: ${process.env.BACKGROUND_COLOR},
+
+${JSON.stringify(jwtObj, null, 4)}`
+
 // App
 const app = express();
 app.get('/', (req, res) => {
-  const token = req.query.token
-
-  const jwtObj = jwt.verify(token, secret, { algorithm: 'HS256' })
-
-  res.send(`Hello ${endCompany}!\n\n${JSON.stringify(jwtObj, null, 4)}`);
+  try {
+    const token = req.query.token
+    const jwtObj = jwt.verify(token, jwtSecret, { algorithm: 'HS256' })
+    res.send(html);
+  } catch (err) {
+    res.send(`Error!\n\n${err.toString()}`);    
+  }
 });
 
 app.listen(PORT);
