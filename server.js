@@ -1,9 +1,9 @@
 'use strict';
 
 const express = require('express');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
-const jwtSecret = process.env.JWT_SECRET
+// const jwtSecret = process.env.JWT_SECRET
 const endCompany = process.env.END_COMPANY || 'guest'
 
 
@@ -21,8 +21,8 @@ ${JSON.stringify(jwtObj, null, 4)}`
 const app = express();
 app.get('/', (req, res) => {
   try {
-    const token = req.query.token
-    const jwtObj = jwt.verify(token, jwtSecret, { algorithm: 'HS256' })
+    // const token = req.query.token
+    // const jwtObj = jwt.verify(token, jwtSecret, { algorithm: 'HS256' })
     res.send(html);
   } catch (err) {
     res.send(`Error!\n\n${err.toString()}`);    
