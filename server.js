@@ -12,6 +12,9 @@ const PORT = 3000;
 
 const html = `<body style="background-color: ${process.env.BACKGROUND_COLOR};">
 Hello ${endCompany}!
+
+env: ${JSON.stringify(process.env)},
+
 </body>
 `
 
