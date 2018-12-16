@@ -45,7 +45,7 @@ app.get('/', async (req, res) => {
       const db = client.db(dbName);
       const hitsCollection = db.collection('hits');
 
-      await hitsCollection.insert([{ time: Date.now() }]
+      await hitsCollection.insert([{ time: Date.now() }])
       count = await hitsCollection.count()
     } finally {
       client.close();    
