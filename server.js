@@ -19,9 +19,14 @@ const databaseConnectionOpts = process.env.DATABASE_CONNECTION_OPTIONS.trim();
 const dbUrl: `mongodb://${databaseUser}:${databasePassword}@${databaseHost}:${databasePort}/${databaseName}?${databaseConnectionOpts}`
 const dbName = 'simple-node-app';
 
+function updateHitCount() {
+
+}
+
+
 // App
 const app = express();
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   try {
 
     let count = null
@@ -30,7 +35,7 @@ app.get('/', (req, res) => {
     try {
       const db = client.db(dbName);
       const hitsCollection = db.collection('hits');
-      // Insert some documents
+
       await hitsCollection.insert([{ time: Date.now() }]
       count = await hitsCollection.count()
     } finally {
@@ -53,4 +58,3 @@ app.get('/', (req, res) => {
 
 app.listen(PORT);
 console.log('Running on http://localhost:' + PORT);
-
