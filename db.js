@@ -14,7 +14,7 @@ const dbUrl = `mongodb://${databaseUser}:${databasePassword}@${databaseHost}:${d
 const dbName = 'simple-node-app';
 
 
-export async function updateHitCount() {
+exports.updateHitCount = async () => {
   const client = await MongoClient.connect(dbUrl)
   try {
     const db = client.db(dbName);
