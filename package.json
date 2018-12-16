@@ -5,10 +5,12 @@
   "author": "Jorge Bianquetti <jbianquettit@bitnami.com>",
   "main": "server.js",
   "scripts": {
+    "push": "git add . && git commit -m \"auto-commit\" && git push",
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.13",
-    "jsonwebtoken": "^8.4.0"
+    "jsonwebtoken": "^8.4.0",
+    "mongodb": "^3.1.10"
   }
 }
