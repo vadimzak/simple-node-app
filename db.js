@@ -11,7 +11,7 @@ const databaseName = process.env.DATABASE_NAME.trim();
 const databaseConnectionOpts = process.env.DATABASE_CONNECTION_OPTIONS.trim();
 
 const dbUrl = `mongodb://${databaseUser}:${databasePassword}@${databaseHost}:${databasePort}/${databaseName}?${databaseConnectionOpts}`
-const dbName = 'simple-node-app';
+const dbName = databaseName;
 
 
 exports.updateHitCount = async () => {
