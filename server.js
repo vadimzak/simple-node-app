@@ -38,18 +38,7 @@ const app = express();
 app.get('/', async (req, res) => {
   try {
 
-    let count = null
-
-    const client = await MongoClient.connect(url)
-    try {
-      const db = client.db(dbName);
-      const hitsCollection = db.collection('hits');
-
-      await hitsCollection.insert([{ time: Date.now() }])
-      count = await hitsCollection.count()
-    } finally {
-      client.close();    
-    }
+    const count = await updateHitCount()
 
     const html = `
       <body style="background-color: ${process.env.BACKGROUND_COLOR}; color: ${process.env.TEXT_COLOR}">
