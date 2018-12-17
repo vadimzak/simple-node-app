@@ -20,8 +20,8 @@ exports.updateHitCount = async () => {
     const db = client.db(dbName);
     const hitsCollection = db.collection('hits');
 
-    await hitsCollection.insert([{ time: Date.now() }])
-    return await hitsCollection.count()
+    await hitsCollection.insertOne({ time: Date.now() })
+    return await hitsCollection.countDocuments()
   } finally {
     client.close();
   }

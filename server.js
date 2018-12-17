@@ -18,12 +18,11 @@ app.get('/', async (req, res) => {
     const count = await updateHitCount()
 
     const html = `
-      <body style="background-color: ${process.env.BACKGROUND_COLOR}; color: ${process.env.TEXT_COLOR}">
+      <body>
         Hello ${process.env.END_COMPANY || 'guest'}, (hitcount: ${count})<br>
-        <ol>
-          ${[...Array(Number(process.env.BULLETS)).keys()].map(i => `<li>${process.env.MOTO}</li>`).join('')}
-        </ol >
-      </body >
+        Subscription type: ${process.env.SUBSCRIPTION}<br>
+        Months: ${process.env.MONTHS}
+      </body>
     `
     res.send(html);
   } catch (err) {
