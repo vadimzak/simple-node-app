@@ -33,7 +33,7 @@ async function startWebServer () {
       </body>
     `
       res.send(html)
-      console.error('Web request completed')
+      console.log('Web request completed')
     } catch (err) {
       res.send(500, `Error!\n\n${err.toString()}`)
       console.error('Web request failed', err)
@@ -53,7 +53,7 @@ async function startAgentServer () {
       const hostname = req.query['agent-hostname']
       await registerAgentRequest(hostname)
       res.send(200)
-      console.error('Agent request completed')
+      console.log('Agent request completed')
     } catch (err) {
       res.send(500, `Error!\n\n${err.toString()}`)
       console.error('Agent request failed', err)
