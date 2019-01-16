@@ -6,11 +6,22 @@
   "main": "server.js",
   "scripts": {
     "push": "git add . && git commit -m \"auto-commit\" && git push",
-    "start": "node server.js"
+    "lint": "eslint .",
+    "start": "node server.js",
+    "dev": "END_COMPANY=dev_company SUBSCRIPTION=regular SLA=low MONTHS=42 node server.js",
+    "spawn-db": "docker-compose up"
   },
   "dependencies": {
     "express": "^4.13",
     "jsonwebtoken": "^8.4.0",
     "mongodb": "^3.1.10"
+  },
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
   }
 }
