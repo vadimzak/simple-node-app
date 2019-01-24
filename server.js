@@ -33,9 +33,9 @@ async function startWebServer () {
 
   const webApp = express()
 
-  // webApp.use(basicAuth({
-  //   users: { [adminEmail]: adminPassword }
-  // }))
+  webApp.use(basicAuth({
+    users: { [adminEmail]: adminPassword }
+  }))
 
   webApp.get('/', async (req, res) => {
     try {
@@ -49,8 +49,6 @@ async function startWebServer () {
         SLA: <strong>${sla}</strong><br>
         Months: <strong>${months}</strong><br>
         Agent hostname: <strong>${JSON.stringify(agentHostname)}</strong><br>
-        ${adminEmail}<br>
-        ${adminPassword}<br>
       </body>
     `
       res.send(html)
