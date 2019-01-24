@@ -14,6 +14,8 @@ const accountApiKey = readEnv('ACCOUNT_API_KEY')
 const subscription = readEnv('SUBSCRIPTION')
 const sla = readEnv('SLA')
 const months = readEnv('MONTHS')
+const adminUsername = readEnv('ADMIN_USERNAME')
+const adminPassword = readEnv('ADMIN_PASSWORD')
 
 ;(async () => {
   try {
@@ -28,7 +30,13 @@ const months = readEnv('MONTHS')
 
 async function startWebServer () {
   const WEB_PORT = 3000
+
   const webApp = express()
+
+  webApp.use(basicAuth({
+    users: { [adminUsername]: adminPassword }
+  }))
+
   webApp.get('/', async (req, res) => {
     try {
       const hitCount = await updateHitCount()
