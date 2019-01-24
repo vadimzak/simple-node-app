@@ -14,7 +14,7 @@ const accountApiKey = readEnv('ACCOUNT_API_KEY')
 const subscription = readEnv('SUBSCRIPTION')
 const sla = readEnv('SLA')
 const months = readEnv('MONTHS')
-const adminEmail = readEnv('ADMIN_EMAIL')
+const adminEmail = 'abc' //readEnv('ADMIN_EMAIL')
 const adminPassword = readEnv('ADMIN_PASSWORD')
 
 ;(async () => {
