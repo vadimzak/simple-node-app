@@ -6,7 +6,7 @@ const basicAuth = require('express-basic-auth')
 const { updateHitCount, getLastAgentRequest, registerAgentRequest } = require('./db')
 
 function readEnv (envVarName) {
-  return process.env[envVarName] || (() => { throw new Error(`Env var '${envVarName}' is unset`)})
+  return process.env[envVarName] || (() => { throw new Error(`Env var '${envVarName}' is unset`) })
 }
 
 const endCompany = readEnv('END_COMPANY')
@@ -14,7 +14,7 @@ const accountApiKey = readEnv('ACCOUNT_API_KEY')
 const subscription = readEnv('SUBSCRIPTION')
 const sla = readEnv('SLA')
 const months = readEnv('MONTHS')
-const adminUsername = readEnv('ADMIN_USERNAME')
+const adminEmail = readEnv('ADMIN_EMAIL')
 const adminPassword = readEnv('ADMIN_PASSWORD')
 
 ;(async () => {
@@ -34,7 +34,7 @@ async function startWebServer () {
   const webApp = express()
 
   webApp.use(basicAuth({
-    users: { [adminUsername]: adminPassword }
+    users: { [adminEmail]: adminPassword }
   }))
 
   webApp.get('/', async (req, res) => {
