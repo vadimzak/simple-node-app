@@ -36,6 +36,7 @@ async function startWebServer () {
   webApp.use('/app', basicAuth({
     users: { [adminEmail]: adminPassword },
     challenge: true,
+    realm: 'Imb4T3st4pp',
   }))
 
   webApp.get('/app', async (req, res) => {
