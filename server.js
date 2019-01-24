@@ -14,8 +14,8 @@ const accountApiKey = readEnv('ACCOUNT_API_KEY')
 const subscription = readEnv('SUBSCRIPTION')
 const sla = readEnv('SLA')
 const months = readEnv('MONTHS')
-const adminEmail = 'username' //readEnv('ADMIN_EMAIL')
-const adminPassword = 'password' //readEnv('ADMIN_PASSWORD')
+const adminEmail = readEnv('ADMIN_EMAIL')
+const adminPassword = readEnv('ADMIN_PASSWORD')
 
 ;(async () => {
   try {
@@ -33,11 +33,11 @@ async function startWebServer () {
 
   const webApp = express()
 
-  webApp.use(basicAuth({
+  webApp.use('/app', basicAuth({
     users: { [adminEmail]: adminPassword }
   }))
 
-  webApp.get('/', async (req, res) => {
+  webApp.get('/app', async (req, res) => {
     try {
       const hitCount = await updateHitCount()
       const agentHostname = await getLastAgentRequest()
@@ -57,6 +57,10 @@ async function startWebServer () {
       res.send(500, `Error!\n\n${err.toString()}`)
       console.error('Web request failed', err)
     }
+  })
+
+  webApp.get('/health', async (req, res) => {
+    res.send(200)
   })
 
   webApp.listen(WEB_PORT)
