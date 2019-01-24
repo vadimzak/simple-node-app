@@ -34,7 +34,8 @@ async function startWebServer () {
   const webApp = express()
 
   webApp.use('/app', basicAuth({
-    users: { [adminEmail]: adminPassword }
+    users: { [adminEmail]: adminPassword },
+    challenge: true,
   }))
 
   webApp.get('/app', async (req, res) => {
