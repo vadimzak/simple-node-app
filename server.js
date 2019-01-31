@@ -11,8 +11,7 @@ function readEnv (envVarName) {
 
 const endCompany = readEnv('END_COMPANY')
 const accountApiKey = readEnv('ACCOUNT_API_KEY')
-const subscription = readEnv('SUBSCRIPTION')
-const sla = readEnv('SLA')
+const enableTosSecureChange = readEnv('ENABLE_TOS_SECURE_CHANGE')
 const months = readEnv('MONTHS')
 const adminEmail = readEnv('ADMIN_EMAIL')
 const adminPassword = readEnv('ADMIN_PASSWORD')
@@ -36,7 +35,7 @@ async function startWebServer () {
   webApp.use('/app', basicAuth({
     users: { [adminEmail]: adminPassword },
     challenge: true,
-    realm: 'Imb4T3st4pp',
+    realm: 'jovianx-simple-node-app',
   }))
 
   webApp.get('/app', async (req, res) => {
@@ -45,14 +44,13 @@ async function startWebServer () {
       const agentHostname = await getLastAgentRequest()
 
       const html = `
-      <body>
-        Hello <strong>${endCompany}</strong>, (hitcount: <strong>${hitCount}</strong>)<br>
-        Subscription type: <strong>${subscription}</strong><br>
-        SLA: <strong>${sla}</strong><br>
-        Months: <strong>${months}</strong><br>
-        Agent hostname: <strong>${JSON.stringify(agentHostname)}</strong><br>
-      </body>
-    `
+        <body>
+          Hello <strong>${endCompany}</strong>, (hitcount: <strong>${hitCount}</strong>)<br>
+          TOS Secure: <strong>${enableTosSecureChange}</strong><br>
+          Months: <strong>${months}</strong><br>
+          Agent hostname: <strong>${JSON.stringify(agentHostname)}</strong><br>
+        </body>
+      `
       res.send(html)
       console.log('Web request completed')
     } catch (err) {
