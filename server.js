@@ -16,8 +16,9 @@ const enableTosSecureChange = readEnv('ENABLE_TOS_SECURE_CHANGE')
 const months = readEnv('MONTHS')
 const adminEmail = readEnv('ADMIN_EMAIL')
 const adminPassword = readEnv('ADMIN_PASSWORD')
+const apiBaseUrl = readEnv('API_BASE_URL')
 
-const jovianXSDK = new JovianXSDK(endCompany, accountApiKey)
+const jovianXSDK = new JovianXSDK(apiBaseUrl, endCompany, accountApiKey)
 
 ;(async () => {
   try {

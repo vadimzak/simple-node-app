@@ -5,15 +5,15 @@ const request = require('request')
 const promisifiedRequest = async (options) => new Promise((resolve, reject) => request(options, (err, data) => err ? reject(err) : resolve(data)))
 
 module.exports = class JovianXSDK {
-
-  constructor (endCompany, accountApiKey) {
+  constructor (apiBaseUrl, endCompany, accountApiKey) {
+    this.apiBaseUrl = apiBaseUrl
     this.endCompany = endCompany
     this.accountApiKey = accountApiKey
   }
 
   async trackEvent (event, data) {
     await promisifiedRequest({
-      url: `http://dev.app.jovianx.com:3000/api/v1/track_event?event=${encodeURIComponent(event)}`,
+      url: `${this.apiBaseUrl}/track_event?event=${encodeURIComponent(event)}`,
       method: 'POST',
       headers: {
         'Jx-Vendor': 'tufin',
