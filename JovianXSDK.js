@@ -13,14 +13,18 @@ module.exports = class JovianXSDK {
   }
 
   async trackEvent (event, data) {
-    await promisifiedRequest({
-      url: `${this.apiBaseUrl}/track_event?event=${encodeURIComponent(event)}`,
-      method: 'POST',
-      headers: {
-        'Jx-Vendor': this.vendorCompany,
-        'Authorization': 'Basic ' + Buffer.from(this.endCompany + ':' + this.accountApiKey).toString('base64'),
-      },
-      json: data,
-    })
+    try {
+      await promisifiedRequest({
+        url: `${this.apiBaseUrl}/track_event?event=${encodeURIComponent(event)}`,
+        method: 'POST',
+        headers: {
+          'Jx-Vendor': this.vendorCompany,
+          'Authorization': 'Basic ' + Buffer.from(this.endCompany + ':' + this.accountApiKey).toString('base64'),
+        },
+        json: data,
+      })
+    } catch (err) {
+      console.error('Failed to track event', err)
+    }
   }
 }
