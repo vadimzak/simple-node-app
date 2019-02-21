@@ -10,6 +10,7 @@ function readEnv (envVarName) {
   return process.env[envVarName] || (() => { throw new Error(`Env var '${envVarName}' is unset`) })
 }
 
+const vendorCompany = readEnv('VENDOR_COMPANY')
 const endCompany = readEnv('END_COMPANY')
 const accountApiKey = readEnv('ACCOUNT_API_KEY')
 const enableTosSecureChange = readEnv('ENABLE_TOS_SECURE_CHANGE')
@@ -18,7 +19,7 @@ const adminEmail = readEnv('ADMIN_EMAIL')
 const adminPassword = readEnv('ADMIN_PASSWORD')
 const apiBaseUrl = readEnv('API_BASE_URL')
 
-const jovianXSDK = new JovianXSDK(apiBaseUrl, endCompany, accountApiKey)
+const jovianXSDK = new JovianXSDK(apiBaseUrl, vendorCompany, endCompany, accountApiKey)
 
 ;(async () => {
   try {

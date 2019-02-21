@@ -5,8 +5,9 @@ const request = require('request')
 const promisifiedRequest = async (options) => new Promise((resolve, reject) => request(options, (err, data) => err ? reject(err) : resolve(data)))
 
 module.exports = class JovianXSDK {
-  constructor (apiBaseUrl, endCompany, accountApiKey) {
+  constructor (apiBaseUrl, vendorCompany, endCompany, accountApiKey) {
     this.apiBaseUrl = apiBaseUrl
+    this.vendorCompany = vendorCompany
     this.endCompany = endCompany
     this.accountApiKey = accountApiKey
   }
@@ -16,7 +17,7 @@ module.exports = class JovianXSDK {
       url: `${this.apiBaseUrl}/track_event?event=${encodeURIComponent(event)}`,
       method: 'POST',
       headers: {
-        'Jx-Vendor': 'tufin',
+        'Jx-Vendor': this.vendorCompany,
         'Authorization': 'Basic ' + Buffer.from(this.endCompany + ':' + this.accountApiKey).toString('base64'),
       },
       json: data,
