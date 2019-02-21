@@ -4,6 +4,7 @@ const express = require('express')
 const basicAuth = require('express-basic-auth')
 
 const { updateHitCount, getLastAgentRequest, registerAgentRequest } = require('./db')
+const JovianXSDK = require('./JovianXSDK')
 
 function readEnv (envVarName) {
   return process.env[envVarName] || (() => { throw new Error(`Env var '${envVarName}' is unset`) })
@@ -16,14 +17,18 @@ const months = readEnv('MONTHS')
 const adminEmail = readEnv('ADMIN_EMAIL')
 const adminPassword = readEnv('ADMIN_PASSWORD')
 
+const jovianXSDK = new JovianXSDK(endCompany, accountApiKey)
+
 ;(async () => {
   try {
     await Promise.all([
       startWebServer(),
       startAgentServer(),
     ])
+    await jovianXSDK.trackEvent('App initialized', { timestamp: Date.now() })
   } catch (err) {
     console.error('Fatal error', err)
+    await jovianXSDK.trackEvent('App initialization failed', { err: err.toString() })
   }
 })()
 
@@ -60,7 +65,7 @@ async function startWebServer () {
   })
 
   webApp.get('/health', async (req, res) => {
-    res.send(200)
+    res.sendStatus(200)
   })
 
   webApp.listen(WEB_PORT)
@@ -80,8 +85,9 @@ async function startAgentServer () {
     try {
       const hostname = req.query['agent-hostname']
       await registerAgentRequest(hostname)
-      res.send(200)
+      res.sendStatus(200)
       console.log('Agent request completed')
+      await jovianXSDK.trackEvent('Agent reported', { hostname: hostname })
     } catch (err) {
       res.send(500, `Error!\n\n${err.toString()}`)
       console.error('Agent request failed', err)
