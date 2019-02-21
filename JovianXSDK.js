@@ -24,7 +24,7 @@ module.exports = class JovianXSDK {
         json: data,
       })
     } catch (err) {
-      console.error('Failed to track event', err)
+      console.error('JovianXSDK: Failed to track event', err)
     }
   }
 }
